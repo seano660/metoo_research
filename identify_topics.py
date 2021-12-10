@@ -15,7 +15,7 @@ def identify_topics(corpus, ldamodel, num_topics):
             for topic in row:
                 temp[topic[0]] = topic[1]
             sent_topics_df = sent_topics_df.append(pd.Series(temp), ignore_index=True)
-        sent_topics_df.to_csv(f'{num_topics}_sentence_topics.csv', sep='\t', index=False, mode='a', header=False)
+        sent_topics_df.to_csv(f'data/{num_topics}_sentence_topics.csv', sep='\t', index=False, mode='a', header=False)
         print(f'saved {start}-{end}')
 
 if __name__ == '__main__':

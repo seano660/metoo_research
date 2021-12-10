@@ -2,7 +2,9 @@ import pandas as pd
 from prepare_training import preprocess_text
 
 df = pd.read_csv('data/data_with_demographic.csv', sep='\t')
-df = df[df['UserType'].notna() & df['Account Type'].notna()]
+df = df[df['UserType'].notna() | df['Account Type'].notna()]
+
+print(df)
 
 df.to_csv('data/analysis_data.csv', sep='\t', index=False)
 

@@ -2,7 +2,8 @@ import sys
 import pandas as pd
 import re
 from gensim.utils import simple_preprocess
-
+import nltk
+nltk.download('stopwords')
 from nltk.corpus import stopwords
 
 def remove_stopwords(texts):

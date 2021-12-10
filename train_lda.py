@@ -3,9 +3,9 @@ import gensim.corpora as corpora
 
 from pprint import pprint
 
-data_path = 'training_data.txt'
-num_topics = [25, 50, 75, 100, 125, 150, 175, 200]
-decays = [0.5, 0.6, 0.7, 0.8, 0.9]
+data_path = 'data/training_data.txt'
+num_topics = [25]#, 50, 75, 100, 125, 150, 175, 200]
+decays = [0.5]#, 0.6, 0.7, 0.8, 0.9]
 with open(data_path, 'r', encoding='utf-8') as f:
     data = f.readlines()
 
@@ -25,7 +25,7 @@ for num in num_topics:
         lda_model = gensim.models.ldamodel.LdaModel(corpus=corpus,
                                                     id2word=id2word,
                                                     num_topics=num,
-                                                    decay=0.7,
+                                                    decay=decay,
                                                     random_state=100)
 
         print(f'trained model topics-{num}, decay-{decay}')

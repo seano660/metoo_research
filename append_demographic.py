@@ -15,4 +15,5 @@ if __name__ == '__main__':
     data = sys.argv[2]
     name = sys.argv[3]
     append_demographic(j, data, name)
+    print('appended', name)
 
