@@ -4,8 +4,8 @@ import gensim.corpora as corpora
 from pprint import pprint
 
 data_path = 'data/training_data.txt'
-num_topics = [25]#, 50, 75, 100, 125, 150, 175, 200]
-decays = [0.5]#, 0.6, 0.7, 0.8, 0.9]
+num_topics = [25, 50, 75, 100, 125, 150, 175, 200]
+decays = [0.5, 0.6, 0.7, 0.8, 0.9]
 with open(data_path, 'r', encoding='utf-8') as f:
     data = f.readlines()
 
