@@ -1,4 +1,4 @@
-from Demographer.gender_neural import NeuralGenderDemographer
+from gender_neural import NeuralGenderDemographer
 import json
 
 
