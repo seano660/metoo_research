@@ -3,12 +3,13 @@ from prepare_training import preprocess_text
 
 df = pd.read_csv('data/data_with_demographic.csv', sep='\t')
 df = df[df['UserType'].notna() | df['Account Type'].notna()]
-
 print(df)
 
 df.to_csv('data/analysis_data.csv', sep='\t', index=False)
 
-data = preprocess_text(df['Full Text'].values.tolist())
+data = df['Full Text'].values.tolist()
+df = None
+data = preprocess_text(data)
 
 data = [" ".join(text + ['\n']) for text in data]
 
