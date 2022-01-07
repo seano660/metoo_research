@@ -10,6 +10,8 @@ python3 get_analysis_set.py
 python3 text2corpus.py
 python3 identify_topics.py models/lda-model-100-0.7 100
 python3 append_topics_to_df.py data/analysis_data.csv data/100_sentence_topics.csv 100 
+python3 infer_account_types.py data_with_100.csv data_with_100.csv data/analysis_text.txt
+python3 create_demographics_json.py data_with_100.csv
 python3 topics2json.py models/lda-model-100-0.7 100
 
 
