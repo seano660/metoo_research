@@ -1,5 +1,5 @@
-# CS7290_project
-Repository to hold the notebook code for my CS7290 project
+# metoo research
+Repository to hold the notebook code for metoo influential actor engagement research.
 
 To install required packages, run pip3 install -r requirements.txt
 
