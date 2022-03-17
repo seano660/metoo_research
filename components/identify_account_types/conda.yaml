@@ -1,0 +1,13 @@
+name: account_type_model
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - mlflow
+  - pandas
+  - pyspark
+  - pip
+  - python=3.9
+  - pip:
+    - wandb
+    - scikit-learn

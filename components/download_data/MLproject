@@ -1,0 +1,11 @@
+name: download_data
+conda_env: conda.yaml
+
+entry_points:
+    main:
+        parameters:
+            mode:
+                description: whether to push artifacts remotely
+                type: str
+
+        command: "python run.py {mode}" 

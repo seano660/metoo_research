@@ -1,0 +1,10 @@
+name: main
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - hydra-core
+  - mlflow
+  - pip
+  - pip:
+    - wandb

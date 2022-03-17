@@ -1,0 +1,12 @@
+name: preprocess_data
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - mlflow
+  - pandas
+  - gensim
+  - pip
+  - python=3.9
+  - pip:
+    - wandb

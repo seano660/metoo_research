@@ -1,0 +1,20 @@
+name: preprocess_data
+conda_env: conda.yaml
+
+entry_points:
+    main:
+        parameters:
+            mode:
+                description: whether to push artifacts remotely
+                type: str
+            
+            input_path:
+                description: where to find the input artifact
+                type: str
+
+            exclude:
+                description: additional (comma-separated) stopwords to exclude
+                type: str
+                default: ''
+
+        command: "python run.py {mode} {input_path} --exclude {exclude}" 

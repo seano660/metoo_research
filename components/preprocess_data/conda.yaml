@@ -1,0 +1,14 @@
+name: preprocess_data
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - nltk
+  - mlflow
+  - pandas
+  - pyspark
+  - pip
+  - python=3.9
+  - pip:
+    - wandb
+    - ../component_utils

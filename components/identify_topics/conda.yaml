@@ -1,0 +1,14 @@
+name: lda_model
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - mlflow
+  - pandas
+  - pyspark
+  - gensim
+  - pip
+  - python=3.9
+  - pip:
+    - wandb
+    - demographer=1.0.4

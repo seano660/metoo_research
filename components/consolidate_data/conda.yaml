@@ -1,0 +1,14 @@
+name: consolidate_data
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - mlflow
+  - pandas
+  - openpyxl
+  - pip
+  - pyspark
+  - python=3.9
+  - pip:
+    - wandb
+    - ../component_utils

@@ -1,0 +1,19 @@
+mode: local
+main:
+  project_name: metoo_research
+  experiment_name: dev
+  steps: all
+
+components:
+  download_data:
+
+  consolidate_data:
+    input_path: ../download_data/artifacts/metoo_data.zip
+
+  preprocess_data:
+    input_path: ../consolidate_data/artifacts/metoo_data.csv
+    exclude: metoo,rt
+
+  lda_model:
+    train_size: 0.75
+    random_state: 0
