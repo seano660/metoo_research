@@ -7,7 +7,6 @@ dependencies:
   - pandas
   - openpyxl
   - pip
-  - pyspark
   - python=3.9
   - pip:
     - wandb

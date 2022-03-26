@@ -6,6 +6,7 @@ dependencies:
   - nltk
   - mlflow
   - pandas
+  - numpy
   - pyspark
   - pip
   - python=3.9

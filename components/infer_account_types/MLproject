@@ -1,4 +1,4 @@
-name: lda_model
+name: infer_account_types
 conda_env: conda.yaml
 
 entry_points:
@@ -12,4 +12,9 @@ entry_points:
                 description: where to find the input artifact
                 type: str
 
-        command: "python run.py {mode} {input_path}" 
+            random_state:
+                description: seed for setting random state
+                type: int
+                default: null
+
+        command: "python run.py {mode} {input_path} --random_state {random_state}" 

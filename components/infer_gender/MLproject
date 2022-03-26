@@ -10,6 +10,6 @@ entry_points:
             
             input_path:
                 description: where to find the input artifact
-                type: str
+                type: str            
 
         command: "python run.py {mode} {input_path}" 

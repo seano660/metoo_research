@@ -1,18 +1,17 @@
 from argparse import ArgumentParser
 import logging
-import os
 from pathlib import Path
 import re
-import tempfile
 from zipfile import ZipFile
 
 import pandas as pd
 
-from utils.general import create_artifact_folder
+from component_utils.general import create_artifact_folder
 
 logger = logging.getLogger()
 
-def consolidate_data(args):
+
+def go(args):
     cols = [
         "Date", "Page Type", "Account Type", "Author", "Full Text", 
         "Gender", "Hashtags", "Impact", "Impressions", "Thread Entry Type", 
@@ -46,28 +45,6 @@ def consolidate_data(args):
     except Exception as e:
         logger.error("An error occurred in the data consolidation process.")
         raise e
-
-    if args.mode == "remote":
-        import wandb
-        from wandb_utils.utils import log_artifact
-
-        run = wandb.init(job_type = "consolidate_data")
-        logger.info("Logging artifact in W&B...")
-        log_artifact(
-            run = run, 
-            path_to_file = artifact_path / "metoo_data.csv",
-            art_name = "metoo_data.csv",
-            art_type = "csv",
-            art_desc = "Consolidated MeToo twitter data"
-        )
-
-def go(args):
-    if os.path.exists(args.input_path):
-        consolidate_data(args)
-    else:
-        logger.error("Downloaded data not found in target location.")
-        raise FileNotFoundError
-
 
 if __name__ == "__main__":
     parser = ArgumentParser()

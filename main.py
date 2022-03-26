@@ -8,8 +8,9 @@ import mlflow
 @hydra.main(config_name="config", config_path = ".")
 def go(config):
 
-    os.environ["WANDB_PROJECT"] = config["main"]["project_name"]
-    os.environ["WANDB_RUN_GROUP"] = config["main"]["experiment_name"]
+    if config["mode"] == "remote":
+        os.environ["WANDB_PROJECT"] = config["main"]["project_name"]
+        os.environ["WANDB_RUN_GROUP"] = config["main"]["experiment_name"]
 
     root_path = hydra.utils.get_original_cwd()
 
@@ -27,7 +28,6 @@ def go(config):
                     **params
                 }
             )
-
 
 if __name__ == "__main__":
     go()

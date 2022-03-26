@@ -5,7 +5,7 @@ main:
   steps: all
 
 components:
-  download_data:
+  download_data: 
 
   consolidate_data:
     input_path: ../download_data/artifacts/metoo_data.zip
@@ -15,5 +15,11 @@ components:
     exclude: metoo,rt
 
   lda_model:
+    input_path: ../preprocess_data/artifacts/metoo_data.csv
     train_size: 0.75
     random_state: 0
+
+  identify_account_types:
+    input_path: ../preprocess_data/artifacts/metoo_data.csv
+    random_state: 0
+    vocab_size: null

@@ -1,4 +1,4 @@
-name: account_type_model
+name: train_lda
 conda_env: conda.yaml
 
 entry_points:

@@ -2,7 +2,7 @@ from argparse import ArgumentParser
 from typing import List
 
 from demographer import NeuralGenderDemographer
-import pyspark as spark
+import pandas as pd
 
 from component_utils.general import create_artifact_folder
 
@@ -22,12 +22,14 @@ def _get_gender_mapper(users: List):
 def go(args):
     artifact_path = create_artifact_folder(__file__)
 
-    data = spark.read.options(sep = "/t", header = True).csv(args.input_path).to_pandas()
+    data = pd.read_csv(args.input_path, sep = "\t")
     users = [u.strip() for u in data["Author"].unique()]
 
     gender_mapper = _get_gender_mapper(users)
 
     data["gender_inferred"] = data["author"].map(gender_mapper)
+
+    data.to_csv(artifact_path / "metoo_data.csv", sep = "\t")
 
 
 if __name__ == "__main__":

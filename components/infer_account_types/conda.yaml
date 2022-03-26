@@ -1,4 +1,4 @@
-name: process_data
+name: infer_account_types
 channels:
   - conda-forge
   - defaults
@@ -10,4 +10,4 @@ dependencies:
   - python=3.9
   - pip:
     - wandb
-    - demographer=1.0.4
+    - scikit-learn
