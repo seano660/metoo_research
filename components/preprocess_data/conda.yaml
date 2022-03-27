@@ -10,6 +10,7 @@ dependencies:
   - pip
   - python=3.9
   - spacy
+  - spacy-model-en_core_web_sm
   - pip:
     - wandb
     - ../component_utils
