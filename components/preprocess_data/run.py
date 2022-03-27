@@ -26,10 +26,10 @@ def go(args):
     data["Full Text"] = (
         data[data["Thread Entry Type"] != "share"]
         ["Full Text"].astype(str)
-        .applymap(lambda x: re.sub("http\S*\s?", "", x)) # remove links
-        .applymap(lambda x: re.sub("\s+", "", x)) # remove newlines
-        .applymap(lambda x: re.sub("\'", "", x)) # remove single quotes
-        .applymap(lambda x: " ".join([w for w in simple_preprocess(x, deacc = True) if w not in sws])) # remove stopwords
+        .apply(lambda x: re.sub("http\S*\s?", "", x)) # remove links
+        .apply(lambda x: re.sub("\s+", "", x)) # remove newlines
+        .apply(lambda x: re.sub("\'", "", x)) # remove single quotes
+        .apply(lambda x: " ".join([w for w in simple_preprocess(x, deacc = True) if w not in sws])) # remove stopwords
     )
 
     data.to_csv(artifact_path / "metoo_data.csv", sep = "\t")
