@@ -26,18 +26,8 @@ gridsearch_params = {
 def go(args):
     artifact_path = create_artifact_folder(__file__)
 
-    logger.info("Reading data...")
-    data = pd.read_csv(args.input_path)
-
-    logger.info("Tokenizing data...")
-    tokenized_data = [word_tokenize(text) for text in data]
-
-    dictionary = corpora.Dictionary(tokenized_data)
-    dictionary.filter_extremes(no_below = 10, keep_n = 4000)
-
-    corpus = [dictionary.doc2bow(doc, allow_update=False) for doc in tokenized_data]
-
-    X_train, X_test = train_test_split(corpus, random_state = args.random_state)
+    X_train = pd.read_csv(args.train_path, sep = "\t")
+    X_test = pd.read_csv(args.test_path, sep = "\t")
 
     best_model, best_params, best_perp = None, None, np.inf
 
@@ -64,8 +54,9 @@ def go(args):
 if __name__ == "__main__":
     parser = ArgumentParser()
     parser.add_argument("mode", type = str, help = "Run mode (local or remote)")
-    parser.add_argument("input_path", type = str, help = "Path to input data (.zip)")   
-    parser.add_argument("--random_state", type = int, default = None, help = "Seed for setting random state")     
+    parser.add_argument("train_path", type = str, help = "Path to training data")
+    parser.add_argument("test_path", type = str, help = "Path to testing data")  
+    parser.add_argument("random_state", type = int, help = "Seed for setting random state")     
     args = parser.parse_args()
 
     go(args)

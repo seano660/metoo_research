@@ -8,8 +8,16 @@ entry_points:
                 description: whether to push artifacts remotely
                 type: str
             
-            input_path:
-                description: where to find the input artifact
+            train_path:
+                description: where to find the training data
                 type: str
 
-        command: "python run.py {mode} {input_path}" 
+            test_path:
+                description: where to find the testing data
+                type: str
+
+            random_state:
+                description: seed for setting random state
+                type: int
+
+        command: "python run.py {mode} {train_path} {test_path} {random_state}" 

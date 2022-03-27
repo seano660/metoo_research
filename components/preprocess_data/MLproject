@@ -15,6 +15,5 @@ entry_points:
             exclude:
                 description: additional (comma-separated) stopwords to exclude
                 type: str
-                default: ''
 
-        command: "python run.py {mode} {input_path} --exclude {exclude}" 
+        command: "python run.py {mode} {input_path} {exclude}" 

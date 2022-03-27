@@ -1,0 +1,27 @@
+name: train_test_split
+conda_env: conda.yaml
+
+entry_points:
+    main:
+        parameters:
+            mode:
+                description: whether to push artifacts remotely
+                type: str
+            
+            input_path:
+                description: where to find the input artifact
+                type: str
+            
+            random_state:
+                description: seed for setting the random state
+                type: int
+
+            vocab_size:
+                description: max. number of words to include in corpus
+                type: int
+
+            no_below:
+                description: min. number of occurrences to include in corpus
+                type: int
+
+        command: "python run.py {mode} {input_path} {random_state} {vocab_size} {no_below}" 

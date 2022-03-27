@@ -14,12 +14,18 @@ components:
     input_path: ../consolidate_data/artifacts/metoo_data.csv
     exclude: metoo,rt
 
-  lda_model:
+  train_test_split:
     input_path: ../preprocess_data/artifacts/metoo_data.csv
     train_size: 0.75
     random_state: 0
+    vocab_size: null
+    no_below: 10
 
-  identify_account_types:
+  train_lda:
+    train_path: ../train_test_split/artifacts/X_train.csv
+    test_path: ../train_test_split/artifacts/X_test.csv 
+    random_state: 0
+
+  infer_account_types:
     input_path: ../preprocess_data/artifacts/metoo_data.csv
     random_state: 0
-    vocab_size: null

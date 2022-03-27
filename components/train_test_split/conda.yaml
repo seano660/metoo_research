@@ -1,15 +1,13 @@
-name: preprocess_data
+name: train_test_split
 channels:
   - conda-forge
   - defaults
 dependencies:
   - gensim
+  - scikit-learn
   - mlflow
   - pandas
-  - numpy
   - pip
   - python=3.9
-  - spacy
   - pip:
     - wandb
-    - ../component_utils
