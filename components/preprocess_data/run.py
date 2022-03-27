@@ -18,7 +18,7 @@ def go(args):
     sws = nlp.Defaults.stop_words
     exs = args.exclude.split(",")
     if len(exs) > 0:
-        sws.extend(exs)
+        sws.update(exs)
     
     logger.info("Reading data from input file...")
     data = pd.read_csv(args.input_path, sep = "\t", usecols = ["Full Text", "Thread Entry Type"])
