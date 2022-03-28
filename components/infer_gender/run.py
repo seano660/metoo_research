@@ -1,7 +1,7 @@
 from argparse import ArgumentParser
 from typing import List
 
-from demographer import NeuralGenderDemographer
+from demographer.gender_neural import NeuralGenderDemographer
 import pandas as pd
 
 from component_utils.general import create_artifact_folder
