@@ -13,7 +13,7 @@ def _get_gender_mapper(users: List):
 
     return {
         u: remap[
-            ngd.process_tweet({"name": u})["gender_neural"]["value"]
+            ngd.process_tweet({"name": u.strip()})["gender_neural"]["value"]
         ]
         for u in users
     }
@@ -23,11 +23,11 @@ def go(args):
     artifact_path = create_artifact_folder(__file__)
 
     data = pd.read_csv(args.input_path, sep = "\t")
-    users = [u.strip() for u in data["Author"].unique()]
+    users = [u for u in data["Author"].unique()]
 
     gender_mapper = _get_gender_mapper(users)
 
-    data["gender_inferred"] = data["author"].map(gender_mapper)
+    data["gender_inferred"] = data["Author"].str.strip().map(gender_mapper)
 
     data.to_csv(artifact_path / "metoo_data.csv", sep = "\t")
 

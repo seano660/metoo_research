@@ -9,4 +9,4 @@ dependencies:
   - python=3.9
   - pip:
     - wandb
-    - demographer=1.0.4
+    - demographer==1.0.4
