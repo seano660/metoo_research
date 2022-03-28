@@ -9,3 +9,4 @@ dependencies:
   - python=3.9
   - pip:
     - wandb
+    - ../component_utils

@@ -10,3 +10,4 @@ dependencies:
   - pip:
     - wandb
     - demographer==1.0.4
+    - ../component_utils

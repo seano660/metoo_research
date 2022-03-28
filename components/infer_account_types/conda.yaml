@@ -11,3 +11,4 @@ dependencies:
   - pip:
     - wandb
     - scikit-learn
+    - ../component_utils
