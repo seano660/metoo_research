@@ -7,7 +7,7 @@ dependencies:
   - pandas
   - pip
   - python=3.9
-  - tensorflow
+  - tensorflow=1.13.1
   - pip:
     - wandb
     - demographer==1.0.4
