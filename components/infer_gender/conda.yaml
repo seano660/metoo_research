@@ -6,7 +6,7 @@ dependencies:
   - mlflow
   - pandas
   - pip
-  - python=3.9
+  - python
   - tensorflow=1.13.1
   - pip:
     - wandb
