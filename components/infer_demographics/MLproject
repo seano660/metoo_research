@@ -1,4 +1,4 @@
-name: process_data
+name: infer_demographics
 conda_env: conda.yaml
 
 entry_points:

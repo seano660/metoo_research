@@ -1,14 +1,14 @@
-name: process_data
+name: infer_demographics
 channels:
   - conda-forge
   - defaults
 dependencies:
-  - mlflow
-  - pandas
+  - mlflow=1.24.0
+  - pandas=1.3.5
   - pip
-  - python
+  - python=3.7
   - tensorflow=1.13.1
   - pip:
-    - wandb
+    - wandb=0.12.11
     - demographer==1.0.4
     - ../component_utils

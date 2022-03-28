@@ -8,7 +8,7 @@ from component_utils.general import create_artifact_folder
 
 
 def _get_gender_mapper(users: List):
-    remap = {"Man": "Male", "Woman": "Female"}
+    remap = {"man": "male", "woman": "female"}
     ngd = NeuralGenderDemographer()
 
     return {

@@ -1,6 +1,5 @@
 from argparse import ArgumentParser
 import logging
-from pathlib import Path
 import re
 from zipfile import ZipFile
 
@@ -13,10 +12,10 @@ logger = logging.getLogger()
 
 def go(args):
     cols = [
-        "Date", "Page Type", "Account Type", "Author", "Full Text", 
+        "Date", "Page Type", "Account Type", "Author", "Full Name", "Full Text", 
         "Gender", "Hashtags", "Impact", "Impressions", "Thread Entry Type", 
-        "Twitter Followers", "Twitter Following", "Twitter Tweets", "Twitter Verified", 
-        "Reach (new)", "Region"
+        "Twitter Followers", "Twitter Following", "Twitter Tweets", "Twitter Reply Count",
+        "Twitter Verified", "Twitter Retweets", "Reach (new)", "Region"
     ]
 
     artifact_path = create_artifact_folder(__file__)
