@@ -26,10 +26,6 @@ components:
     test_path: ../train_test_split/artifacts/X_test.csv 
     random_state: 0
 
-  infer_account_types:
-    input_path: ../consolidate_data/artifacts/metoo_data.csv
-    random_state: 0
-
-  infer_gender:
+  infer_demographics:
     input_path: ../consolidate_data/artifacts/metoo_data.csv
 
