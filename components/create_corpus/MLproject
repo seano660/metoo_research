@@ -1,4 +1,4 @@
-name: train_test_split
+name: create_corpus
 conda_env: conda.yaml
 
 entry_points:

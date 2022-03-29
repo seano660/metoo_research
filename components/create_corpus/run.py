@@ -22,16 +22,17 @@ def go(args):
     dictionary = corpora.Dictionary(tokenized_data)
     dictionary.filter_extremes(no_below = args.no_below, keep_n = args.vocab_size)
 
+    logger.info("Creating corpus...")
     corpus = [dictionary.doc2bow(doc, allow_update=False) for doc in tokenized_data]
 
-    logger.info("Splitting train/test data...")
+    logger.info("Splitting train/test corpus...")
     X_train, X_test = train_test_split(
         corpus, 
         random_state = args.random_state, 
         train_size = args.train_size
     )
 
-    logger.info("Writing train/test data to file...")
+    logger.info("Writing train/test corpus to file...")
     X_train.to_csv(artifact_path / "X_train.csv", sep = "\t")
     X_test.to_csv(artifact_path / "X_test.csv", sep = "\t")
 

@@ -14,7 +14,7 @@ components:
     input_path: ../consolidate_data/artifacts/metoo_data.csv
     exclude: metoo,rt
 
-  train_test_split:
+  create_corpus:
     input_path: ../preprocess_data/artifacts/metoo_data.csv
     train_size: 0.75
     random_state: 0

@@ -1,4 +1,4 @@
-name: train_test_split
+name: create_corpus
 channels:
   - conda-forge
   - defaults

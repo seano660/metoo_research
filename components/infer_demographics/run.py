@@ -1,6 +1,4 @@
 from argparse import ArgumentParser
-import re
-from typing import List
 
 from demographer import process_tweet
 import pandas as pd
@@ -46,8 +44,8 @@ def go(args):
         columns = ["gender_inf", "indorg_inf"]
     )
 
-    demo_inf["gender_inf"] = demo_inf["gender_inf"].map(gender_map)
-    demo_inf["indorg_inf"] = demo_inf["indorg_inf"].map(indorg_map)
+    demo_inf["gender_inf"] = demo_inf["gender_inf"].replace(gender_map)
+    demo_inf["indorg_inf"] = demo_inf["indorg_inf"].replace(indorg_map)
 
     demo_inf.to_csv(artifact_path / "inferred_demographics.csv", sep = "\t")
 
