@@ -18,6 +18,8 @@ def get_demographics(user_data: pd.Series):
         "statuses_count": user_data["Twitter Tweets"]
     })
 
+    print(preds)
+
     return [
         user_data["Gender"] or preds["gender_neural"]["value"],
         user_data["Account Type"] or preds["indorg_neural"]["value"]
