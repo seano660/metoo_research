@@ -28,6 +28,7 @@ def go(args):
     artifact_path = create_artifact_folder(__file__)
 
     data = pd.read_csv(args.input_path, sep = "\t")
+
     data["name"] = (
         data["Full Name"].str
         .extract("\((.{1,})\)") # extract text between parens
@@ -39,7 +40,7 @@ def go(args):
     indorg_map = {"ind": "individual", "org": "organisational"}
 
     demo_inf = pd.DataFrame(
-        data.groupby("Author")
+        data.groupby("Author", as_index = False)
         .first()
         .apply(get_demographics, axis = 1),
         columns = ["gender_inf", "indorg_inf"]
