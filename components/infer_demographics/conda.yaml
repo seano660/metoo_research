@@ -9,6 +9,6 @@ dependencies:
   - python=3.7
   - tensorflow=1.13.1
   - pip:
-    - wandb=0.12.11
+    - wandb==0.12.11
     - demographer==1.0.4
     - ../component_utils

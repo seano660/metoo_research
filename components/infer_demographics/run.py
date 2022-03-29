@@ -19,8 +19,8 @@ def get_demographics(user_data: pd.Series):
     })
 
     return [
-        preds["gender_neural"]["value"],
-        preds["indorg_neural"]["value"]
+        user_data["Gender"] or preds["gender_neural"]["value"],
+        user_data["Account Type"] or ["indorg_neural"]["value"]
     ]
 
 
@@ -35,12 +35,20 @@ def go(args):
         .replace("[^A-z]", "") # remove non-alphanumeric
     )
 
-    remap = {"man": "male", "woman": "female"}
+    gender_map = {"man": "male", "woman": "female"}
+    indorg_map = {"ind": "individual", "org": "organisational"}
 
-    data[["gender_inf", "indorg_inf"]] = data.apply(get_demographics, axis = 1)
-    data["gender_inf"] = data["gender_inf"].map(remap)
+    demo_inf = pd.DataFrame(
+        data.groupby("Author")
+        .first()
+        .apply(get_demographics, axis = 1),
+        columns = ["gender_inf", "indorg_inf"]
+    )
 
-    data.to_csv(artifact_path / "metoo_data.csv", sep = "\t")
+    demo_inf["gender_inf"] = demo_inf["gender_inf"].map(gender_map)
+    demo_inf["indorg_inf"] = demo_inf["indorg_inf"].map(indorg_map)
+
+    demo_inf.to_csv(artifact_path / "inferred_demographics.csv", sep = "\t")
 
 
 if __name__ == "__main__":
