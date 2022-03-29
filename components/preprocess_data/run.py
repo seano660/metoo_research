@@ -1,6 +1,5 @@
 from argparse import ArgumentParser
 import logging
-import re
 
 import pandas as pd
 from gensim.utils import simple_preprocess
@@ -25,10 +24,10 @@ def go(args):
 
     data["Full Text"] = (
         data[data["Thread Entry Type"] != "share"]
-        ["Full Text"].astype(str)
-        .apply(lambda x: re.sub("http\S*\s?", "", x)) # remove links
-        .apply(lambda x: re.sub("\s+", "", x)) # remove newlines
-        .apply(lambda x: re.sub("\'", "", x)) # remove single quotes
+        ["Full Text"].str
+        .replace("http\S*\s?", "") # remove links
+        .replace("\s+", " ") # replace any escape character with space
+        .replace("'", "") # remove single quotes
         .apply(lambda x: " ".join([w for w in simple_preprocess(x, deacc = True) if w not in sws])) # remove stopwords
     )
 
