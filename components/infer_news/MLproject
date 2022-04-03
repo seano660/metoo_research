@@ -12,4 +12,12 @@ entry_points:
                 description: where to find the input artifact
                 type: str            
 
-        command: "python run.py {mode} {input_path}" 
+            vocab_size:
+                description: max num. of tokens to include in corpus
+                type: int
+
+            random_state:
+                description: seed for setting the random state
+                type: int
+
+        command: "python run.py {mode} {input_path} {vocab_size} {random_state}" 
