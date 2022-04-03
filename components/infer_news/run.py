@@ -1,60 +1,52 @@
 from argparse import ArgumentParser
 
-from demographer import process_tweet
+from sklearn.model_selection import train_test_split
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics import confusion_matrix
+import numpy as np
 import pandas as pd
 
 from component_utils.general import create_artifact_folder
 
 
-def get_demographics(user_data: pd.Series):
-    preds = process_tweet({
-        "name": user_data["name"].strip(),
-        "username": user_data.name.strip(),
-        "follower_count": user_data["Twitter Followers"],
-        "friends_count": user_data["Twitter Following"],
-        "verified": user_data["Twitter Verified"],
-        "statuses_count": user_data["Twitter Tweets"]
-    })
-
-    return [
-        user_data["Gender"] if user_data["Gender"].notna() else preds["gender_neural"]["value"],
-        user_data["Account Type"] if user_data["Account Type"].notna() else preds["indorg_neural_full"]["value"]
-    ]
-
-
 def go(args):
     artifact_path = create_artifact_folder(__file__)
 
-    data = pd.read_csv(args.input_path, sep = "\t")
+    X_train = pd.read_csv(args.train_path, sep = "\t")
+    X_test = pd.read_csv(args.test_path, sep = "\t")
 
-    data["name"] = (
-        data["Full Name"].str
-        .extract("\((.{1,})\)") # extract text between parens
-        .replace("#[A-z]{1,}\s?", "") # remove hashtags
-        .replace("[^A-z]", "") # remove non-alphanumeric
-    )
+    vec = TfidfVectorizer()
 
-    gender_map = {"man": "male", "woman": "female"}
-    indorg_map = {"ind": "individual", "org": "organisational"}
+    X_train_vec = vec.fit_transform(X_train.groupby("Author")["Full Text"].apply(list))
+    X_test_vec = vec.transform(X_test.groupby("Author")["Full Text"].apply(list))
 
-    authors = data.groupby("Author").first()
+    y_train = X_train["Author"].str.contains("news").astype(int)
+    y_test = X_test["Author"].str.contains("news").astype(int)
 
-    demo_inf = pd.DataFrame(
-        authors.apply(get_demographics, axis = 1),
-        columns = ["gender_inf", "indorg_inf"],
-        index = authors.index
-    )
+    y = pd.concat([y_train, y_test], axis = 1)
 
-    demo_inf["gender_inf"] = demo_inf["gender_inf"].replace(gender_map)
-    demo_inf["indorg_inf"] = demo_inf["indorg_inf"].replace(indorg_map)
+    model = MultinomialNB()
+    model.fit(X_train_vec, y_train)
 
-    demo_inf.to_csv(artifact_path / "inferred_demographics.csv")
+    train_preds = pd.Series(model.predict(X_train_vec), index = X_train.index)
+    test_preds = pd.Series(model.predict(X_test_vec), index = X_test.index)
+    preds = pd.concat([train_preds, test_preds], axis = 1)
+
+    news_inf = y.replace({0: np.nan}).combine_first(preds)
+    
+    cnf = confusion_matrix(y_test, test_preds)
+    print(cnf)
+
+    news_inf.to_csv(artifact_path / "news_inf.csv")
 
 
 if __name__ == "__main__":
     parser = ArgumentParser()
     parser.add_argument("mode", type = str, help = "Run mode (local or remote)")
-    parser.add_argument("input_path", type = str, help = "Path to input data (.zip)")      
+    parser.add_argument("input_path", type = str, help = "Path to input data (.zip)")
+    parser.add_argument("vocab_size", type = int, help = "Max. # of words to include in corpus")
+    parser.add_argument("random_state", type = int, help = "Seed for setting random state")
     args = parser.parse_args()
 
     go(args)
