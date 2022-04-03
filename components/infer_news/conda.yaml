@@ -7,7 +7,7 @@ dependencies:
   - pandas
   - pip
   - python
-  - tensorflow
+  - scikit-learn
   - pip:
     - wandb
     - ../component_utils
