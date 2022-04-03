@@ -15,6 +15,8 @@ def go(args):
 
     data = pd.read_csv(args.input_path, sep = "\t")
 
+    print(data.head())
+
     author_corpus = data.groupby("Author")[["Full Text"]].apply(" ".join)
     
     print(author_corpus.head())
