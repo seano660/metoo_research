@@ -15,7 +15,7 @@ def go(args):
 
     data = pd.read_csv(args.input_path, sep = "\t")
 
-    author_corpus = data.groupby("Author")["Full Text"].apply(list)
+    author_corpus = data.groupby("Author")[["Full Text"]].apply(list)
 
     author_corpus["news_inf"] = author_corpus.index.str.contains("news").astype(int)
 
