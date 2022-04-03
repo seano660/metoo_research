@@ -5,6 +5,7 @@ channels:
 dependencies:
   - mlflow
   - pandas
+  - gensim
   - numpy
   - pip
   - python=3.9

@@ -12,6 +12,7 @@ from gensim.models.ldamodel import LdaMulticore
 from gensim import corpora
 import numpy as np
 import pandas as pd
+import pickle
 import matplotlib.pyplot as plt
 
 from component_utils.general import create_artifact_folder
@@ -28,6 +29,7 @@ def go(args):
 
     X_train = pd.read_csv(args.train_path, sep = "\t")
     X_test = pd.read_csv(args.test_path, sep = "\t")
+    dictionary = pickle.load(args.dict_path)
 
     best_model, best_params, best_perp = None, None, np.inf
 

@@ -26,8 +26,9 @@ components:
     test_path: ../create_corpus/artifacts/X_test.csv
 
   train_lda:
-    train_path: ../train_test_split/artifacts/X_train.csv
-    test_path: ../train_test_split/artifacts/X_test.csv 
+    train_path: ../create_corpus/artifacts/X_train.csv
+    test_path: ../create_corpus/artifacts/X_test.csv 
+    dict_path: ../create_corpus/artifacts/dictionary.obj
     random_state: 0
 
   infer_demographics:

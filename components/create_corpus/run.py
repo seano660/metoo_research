@@ -5,7 +5,7 @@ from gensim import corpora
 from gensim.utils import simple_preprocess
 import pandas as pd
 import pickle
-from sklearn.model_validation import train_test_split
+from sklearn.model_selection import train_test_split
 
 from component_utils.general import create_artifact_folder
 
