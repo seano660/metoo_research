@@ -1,0 +1,15 @@
+name: infer_news
+conda_env: conda.yaml
+
+entry_points:
+    main:
+        parameters:
+            mode:
+                description: whether to push artifacts remotely
+                type: str
+            
+            input_path:
+                description: where to find the input artifact
+                type: str            
+
+        command: "python run.py {mode} {input_path}" 

@@ -1,0 +1,13 @@
+name: infer_news
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - mlflow
+  - pandas
+  - pip
+  - python
+  - tensorflow
+  - pip:
+    - wandb
+    - ../component_utils
