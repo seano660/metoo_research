@@ -24,7 +24,8 @@ def go(args):
     X_train, X_test, y_train, y_test = train_test_split(
         author_corpus["Full Text"], 
         author_corpus["news_inf"],
-        random_state = args.random_state
+        random_state = args.random_state,
+        train_size = args.train_size
     )
 
     X_train_vec = vec.fit_transform(X_train)
