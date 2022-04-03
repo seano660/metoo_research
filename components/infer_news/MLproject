@@ -16,6 +16,10 @@ entry_points:
                 description: max num. of tokens to include in corpus
                 type: int
 
+            train_size:
+                description: fraction of input to use as training data
+                type: float
+
             random_state:
                 description: seed for setting the random state
                 type: int
