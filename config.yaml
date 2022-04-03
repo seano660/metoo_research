@@ -22,8 +22,8 @@ components:
     no_below: 10
 
   infer_news:
-    input_path: ../preprocess_data/artifacts/metoo_data.csv
-    random_state: 0
+    train_path: ../create_corpus/artifacts/X_train.csv
+    test_path: ../create_corpus/artifacts/X_test.csv
 
   train_lda:
     train_path: ../train_test_split/artifacts/X_train.csv

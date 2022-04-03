@@ -4,6 +4,7 @@ import logging
 from gensim import corpora
 from gensim.utils import simple_preprocess
 import pandas as pd
+import pickle
 from sklearn.model_validation import train_test_split
 
 from component_utils.general import create_artifact_folder
@@ -35,6 +36,8 @@ def go(args):
     logger.info("Writing train/test corpus to file...")
     X_train.to_csv(artifact_path / "X_train.csv", sep = "\t")
     X_test.to_csv(artifact_path / "X_test.csv", sep = "\t")
+    pickle.dump(dictionary, artifact_path / "dictionary.obj")
+
 
 if __name__ == "__main__":
     parser = ArgumentParser()
