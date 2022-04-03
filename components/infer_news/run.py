@@ -17,17 +17,17 @@ def go(args):
 
     print(data.head())
 
-    author_corpus = data.groupby("Author")[["Full Text"]].apply(" ".join)
+    author_corpus = data.groupby("Author")["Full Text"].apply(" ".join)
     
     print(author_corpus.head())
 
-    author_corpus["news_inf"] = author_corpus.index.str.contains("news").astype(int)
+    news_inf = author_corpus.index.str.contains("news").astype(int)
 
     vec = TfidfVectorizer(max_features = args.vocab_size)
     
     X_train, X_test, y_train, y_test = train_test_split(
-        author_corpus["Full Text"], 
-        author_corpus["news_inf"],
+        author_corpus, 
+        news_inf,
         random_state = args.random_state,
         train_size = args.train_size
     )
@@ -42,13 +42,12 @@ def go(args):
     test_preds = pd.Series(model.predict(X_test_vec), index = X_test.index)
     preds = pd.concat([train_preds, test_preds], axis = 1)
 
-    author_corpus["news_inf"].replace({0: np.nan}, inplace = True)
-    author_corpus["news_inf"] = author_corpus["news_inf"].combine_first(preds)
+    news_inf = news_inf.replace({0: np.nan}, inplace = True).combine_first(preds)
     
     cnf = confusion_matrix(y_test, test_preds)
     print(cnf)
 
-    author_corpus["news_inf"].to_csv(artifact_path / "news.csv")
+    news_inf.to_csv(artifact_path / "news.csv")
 
 
 if __name__ == "__main__":
