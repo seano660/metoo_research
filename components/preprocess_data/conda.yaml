@@ -3,14 +3,12 @@ channels:
   - conda-forge
   - defaults
 dependencies:
-  - gensim
   - mlflow
   - pandas
   - numpy
   - pip
   - python=3.9
-  - spacy
-  - spacy-model-en_core_web_sm
+  - scikit-learn
   - pip:
     - wandb
     - ../component_utils
