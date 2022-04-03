@@ -20,11 +20,11 @@ def go(args):
         sws.update(exs)
     
     logger.info("Reading data from input file...")
-    data = pd.read_csv(args.input_path, sep = "\t", usecols = ["Full Text", "Thread Entry Type", "Author"])
+    data = pd.read_csv(args.input_path, sep = "\t")
     data = data[data["Thread Entry Type"] != "share"]
 
     data["Full Text"] = (
-        data["Full Text"].dropna()
+        data["Full Text"].fillna("")
         .str
         .replace("http\S*\s?", "") # remove links
         .replace("\s+", " ") # replace any escape character with space
