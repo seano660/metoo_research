@@ -16,7 +16,9 @@ def go(args):
     data = pd.read_csv(args.input_path, sep = "\t")
 
     author_corpus = data.groupby("Author")[["Full Text"]].apply(list)
-
+    
+    print(author_corpus.head())
+    
     author_corpus["news_inf"] = author_corpus.index.str.contains("news").astype(int)
 
     vec = TfidfVectorizer(max_features = args.vocab_size)
