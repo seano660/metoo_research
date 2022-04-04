@@ -37,7 +37,7 @@ def go(args):
 
     train_preds = pd.Series(model.predict(X_train_vec), index = X_train.index)
     test_preds = pd.Series(model.predict(X_test_vec), index = X_test.index)
-    preds = pd.concat([train_preds, test_preds], axis = 1)
+    preds = pd.concat([train_preds, test_preds], axis = 0)
 
     news_inf = news_inf.replace({0: np.nan}).combine_first(preds)
     
