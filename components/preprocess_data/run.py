@@ -24,7 +24,7 @@ def go(args):
     data = data[data["Thread Entry Type"] != "share"]
 
     data["Full Text"] = (
-        data["Full Text"].fillna("")
+        data["Full Text"].fillna(" ")
         .str
         .replace("http\S*\s?", "") # remove links
         .replace("\s+", " ") # replace any escape character with space
