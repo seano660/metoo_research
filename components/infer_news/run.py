@@ -39,7 +39,7 @@ def go(args):
     test_preds = pd.Series(model.predict(X_test_vec), index = X_test.index)
     preds = pd.concat([train_preds, test_preds], axis = 1)
 
-    news_inf = news_inf.replace({0: np.nan}, inplace = True).combine_first(preds)
+    news_inf = news_inf.replace({0: np.nan}).combine_first(preds)
     
     cnf = confusion_matrix(y_test, test_preds)
     print(cnf)
