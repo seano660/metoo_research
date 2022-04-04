@@ -14,8 +14,7 @@ def go(args):
     artifact_path = create_artifact_folder(__file__)
 
     data = pd.read_csv(args.input_path, sep = "\t")
-
-    print(data.head())
+    data["Full Text"] = data["Full Text"].fillna("")
 
     author_corpus = data.groupby("Author")["Full Text"].apply(" ".join)
     
