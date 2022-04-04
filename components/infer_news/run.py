@@ -18,9 +18,7 @@ def go(args):
 
     author_corpus = data.groupby("Author")["Full Text"].apply(" ".join)
     
-    print(author_corpus.head())
-
-    news_inf = author_corpus.index.str.contains("news").astype(int)
+    news_inf = pd.Series(author_corpus.index.str.contains("news").astype(int), index = author_corpus.index)
 
     vec = TfidfVectorizer(max_features = args.vocab_size)
     
