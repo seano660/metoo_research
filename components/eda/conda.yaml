@@ -1,0 +1,13 @@
+name: train_lda
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - mlflow
+  - pandas
+  - nltk
+  - gensim
+  - pip
+  - python=3.9
+  - pip:
+    - wandb

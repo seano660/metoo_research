@@ -1,0 +1,23 @@
+name: train_lda
+conda_env: conda.yaml
+
+entry_points:
+    main:
+        parameters:
+            mode:
+                description: whether to push artifacts remotely
+                type: str
+            
+            train_path:
+                description: where to find the training data
+                type: str
+
+            test_path:
+                description: where to find the testing data
+                type: str
+
+            random_state:
+                description: seed for setting random state
+                type: int
+
+        command: "python run.py {mode} {train_path} {test_path} {random_state}" 
