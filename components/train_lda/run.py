@@ -28,6 +28,7 @@ def go(args):
 
     logger.info("Reading data...")
     data = pd.read_csv(args.input_path, sep = "\t", usecols = ["Full Text"])
+    data["Full Text"] = data["Full Text"].fillna("")
 
     logger.info("Tokenizing data...")
     tokenized_data = [simple_preprocess(text) for text in data["Full Text"]]
