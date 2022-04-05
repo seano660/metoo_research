@@ -8,7 +8,7 @@ nltk.download("punkt", quiet = True)
 from nltk.tokenize import word_tokenize
 from sklearn.model_selection import train_test_split
 
-from gensim.models.ldamodel import LdaMulticore
+from gensim.models.ldamulticore import LdaMulticore
 from gensim import corpora
 from gensim.utils import simple_preprocess
 import numpy as np
@@ -46,7 +46,6 @@ def go(args):
         random_state = args.random_state, 
         train_size = args.train_size
     )
-
 
     best_model, best_params, best_perp = None, None, np.inf
 
