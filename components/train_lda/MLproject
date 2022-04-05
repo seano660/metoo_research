@@ -4,7 +4,7 @@ conda_env: conda.yaml
 entry_points:
     main:
         parameters:
-                        mode:
+            mode:
                 description: whether to push artifacts remotely
                 type: str
             
