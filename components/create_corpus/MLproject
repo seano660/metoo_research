@@ -11,6 +11,10 @@ entry_points:
             input_path:
                 description: where to find the input artifact
                 type: str
+
+            train_size:
+                description: portion of data to set aside for training
+                type: float
             
             random_state:
                 description: seed for setting the random state
@@ -24,4 +28,4 @@ entry_points:
                 description: min. number of occurrences to include in corpus
                 type: int
 
-        command: "python run.py {mode} {input_path} {random_state} {vocab_size} {no_below}" 
+        command: "python run.py {mode} {input_path} {train_size} {random_state} {vocab_size} {no_below}" 
