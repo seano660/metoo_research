@@ -2,6 +2,7 @@ from argparse import ArgumentParser
 
 from demographer import process_tweet
 import pandas as pd
+import numpy as np
 
 from component_utils.general import create_artifact_folder
 
@@ -17,8 +18,8 @@ def get_demographics(user_data: pd.Series):
     })
 
     return [
-        user_data["Gender"] if user_data["Gender"].notna() else preds["gender_neural"]["value"],
-        user_data["Account Type"] if user_data["Account Type"].notna() else preds["indorg_neural_full"]["value"]
+        user_data["Gender"] if np.notna(user_data["Gender"]) else preds["gender_neural"]["value"],
+        user_data["Account Type"] if np.notna(user_data["Account Type"]) else preds["indorg_neural_full"]["value"]
     ]
 
 
