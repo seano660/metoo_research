@@ -19,8 +19,8 @@ from component_utils.general import create_artifact_folder
 logger = logging.getLogger()
 
 gridsearch_params = {
-    "num_topics": np.linspace(25, 200, 25),
-    "decay": np.linspace(0.5, 0.9, 0.1)
+    "num_topics": np.arange(25, 200, 25),
+    "decay": np.arange(0.5, 0.9, 0.1)
 }
 
 def go(args):
