@@ -18,7 +18,7 @@ components:
     input_path: ../preprocess_data/artifacts/metoo_data.csv
     train_size: 0.75
     random_state: 0
-    vocab_size: null
+    vocab_size: 50000
     no_below: 10
 
   infer_news:
