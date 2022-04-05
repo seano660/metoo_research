@@ -6,4 +6,4 @@
 #SBATCH --output=runs/%j.out
 source /home/ohara.s/miniconda3/bin/activate
 conda activate metoo
-mlflow run . -P steps=create_corpus
+mlflow run . -P steps=train_lda

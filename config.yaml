@@ -28,10 +28,11 @@ components:
     vocab_size: 10000
 
   train_lda:
-    train_path: ../create_corpus/artifacts/X_train.csv
-    test_path: ../create_corpus/artifacts/X_test.csv 
-    dict_path: ../create_corpus/artifacts/dictionary.obj
+    input_path: ../preprocess_data/artifacts/metoo_data.csv  
+    train_size: 0.75
     random_state: 0
+    vocab_size: 50000
+    no_below: 10
 
   infer_demographics:
     input_path: ../consolidate_data/artifacts/metoo_data.csv

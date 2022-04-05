@@ -9,6 +9,8 @@ from nltk.tokenize import word_tokenize
 from sklearn.model_selection import train_test_split
 
 from gensim.models.ldamodel import LdaMulticore
+from gensim import corpora
+from gensim.utils import simple_preprocess
 import numpy as np
 import pandas as pd
 import pickle
@@ -26,9 +28,25 @@ gridsearch_params = {
 def go(args):
     artifact_path = create_artifact_folder(__file__)
 
-    X_train = pd.read_csv(args.train_path, sep = "\t")
-    X_test = pd.read_csv(args.test_path, sep = "\t")
-    dictionary = pickle.load(args.dict_path)
+    logger.info("Reading data...")
+    data = pd.read_csv(args.input_path, sep = "\t", usecols = ["Full Text"])
+
+    logger.info("Tokenizing data...")
+    tokenized_data = [simple_preprocess(text) for text in data]
+
+    dictionary = corpora.Dictionary(tokenized_data)
+    dictionary.filter_extremes(no_below = args.no_below, keep_n = args.vocab_size)
+
+    logger.info("Creating corpus...")
+    corpus = [dictionary.doc2bow(doc, allow_update=False) for doc in tokenized_data]
+
+    logger.info("Splitting train/test corpus...")
+    X_train, X_test = train_test_split(
+        corpus, 
+        random_state = args.random_state, 
+        train_size = args.train_size
+    )
+
 
     best_model, best_params, best_perp = None, None, np.inf
 

@@ -9,5 +9,6 @@ dependencies:
   - gensim
   - pip
   - python=3.9
+  - scikit-learn
   - pip:
     - wandb
