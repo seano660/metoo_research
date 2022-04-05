@@ -13,8 +13,6 @@ from gensim import corpora
 from gensim.utils import simple_preprocess
 import numpy as np
 import pandas as pd
-import pickle
-import matplotlib.pyplot as plt
 
 from component_utils.general import create_artifact_folder
 
