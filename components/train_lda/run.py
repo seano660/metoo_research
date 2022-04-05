@@ -30,7 +30,7 @@ def go(args):
     data = pd.read_csv(args.input_path, sep = "\t", usecols = ["Full Text"])
 
     logger.info("Tokenizing data...")
-    tokenized_data = [simple_preprocess(text) for text in data]
+    tokenized_data = [simple_preprocess(text) for text in data["Full Text"]]
 
     dictionary = corpora.Dictionary(tokenized_data)
     dictionary.filter_extremes(no_below = args.no_below, keep_n = args.vocab_size)
