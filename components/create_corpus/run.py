@@ -44,9 +44,9 @@ if __name__ == "__main__":
     parser = ArgumentParser()
     parser.add_argument("mode", type = str, help = "Run mode (local or remote)")
     parser.add_argument("input_path", type = str, help = "Path to input data")     
-    parser.add_argument("random_state", type = int, help = "Seed for setting the random state")
-    parser.add_argument("vocab_size", type = int, help = "Max. # of words to include in corpus") 
-    parser.add_argument("no_below", type = int, help = "Min. # of occurrences to include in corpus")
+    parser.add_argument("random_state", type = int, default = None, help = "Seed for setting the random state")
+    parser.add_argument("vocab_size", type = int, default = None, help = "Max. # of words to include in corpus") 
+    parser.add_argument("no_below", type = int, default = None, help = "Min. # of occurrences to include in corpus")
     args = parser.parse_args()
 
     go(args)
