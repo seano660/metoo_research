@@ -9,7 +9,6 @@ from nltk.tokenize import word_tokenize
 from sklearn.model_selection import train_test_split
 
 from gensim.models.ldamodel import LdaMulticore
-from gensim import corpora
 import numpy as np
 import pandas as pd
 import pickle

@@ -16,7 +16,7 @@ def go(args):
     artifact_path = create_artifact_folder(__file__)
 
     logger.info("Reading data...")
-    data = pd.read_csv(args.input_path, sep = "\t")
+    data = pd.read_csv(args.input_path, sep = "\t", usecols = ["Full Text"])
 
     logger.info("Tokenizing data...")
     tokenized_data = [simple_preprocess(text) for text in data]
