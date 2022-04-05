@@ -18,8 +18,8 @@ def get_demographics(user_data: pd.Series):
     })
 
     return [
-        user_data["Gender"] if np.notna(user_data["Gender"]) else preds["gender_neural"]["value"],
-        user_data["Account Type"] if np.notna(user_data["Account Type"]) else preds["indorg_neural_full"]["value"]
+        user_data["Gender"] if pd.notna(user_data["Gender"]) else preds["gender_neural"]["value"],
+        user_data["Account Type"] if pd.notna(user_data["Account Type"]) else preds["indorg_neural_full"]["value"]
     ]
 
 
