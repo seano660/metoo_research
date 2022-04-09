@@ -32,7 +32,7 @@ def go(args):
             for file in zip.namelist():
                 if r.match(file):
                     data = pd.read_excel(zip.read(file), header = 6, usecols = cols, engine = "openpyxl")
-                    data = data[data["Page Type"] == "twitter"]
+                    data = data[data["Page Type"] == "twitter"][cols]
                     data.to_csv(
                         path_or_buf = artifact_path / "metoo_data.csv", 
                         sep = "\t", 
