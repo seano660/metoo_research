@@ -20,16 +20,23 @@ def go(args):
         sws.update(exs)
     
     logger.info("Reading data from input file...")
-    data = pd.read_csv(args.input_path, sep = "\t")
+
+    data = (
+        pd.read_csv(args.input_path, sep = "\t")
+        .drop_duplicates()
+        .convert_dtypes()
+    )
+
+    data["Date"] = pd.to_datetime(data["Date"])
+
     data = data[data["Thread Entry Type"] != "share"]
 
     data["Full Text"] = (
         data["Full Text"]
         .fillna("")
-        .str
-        .replace("http\S*\s?", "") # remove links
-        .replace("\s+", " ") # replace any escape character with space
-        .replace("'", "") # remove single quotes
+        .str.replace("http\S*\s?", "") # remove links
+        .str.replace("\s+", " ") # replace any escape character with space
+        .str.replace("'", "") # remove single quotes
         .apply(lambda x: " ".join([w for w in simple_preprocess(x, deacc = True) if w not in sws])) # remove stopwords
     )
 

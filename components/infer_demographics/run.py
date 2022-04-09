@@ -8,14 +8,7 @@ from component_utils.general import create_artifact_folder
 
 
 def get_demographics(user_data: pd.Series):
-    preds = process_tweet({
-        "name": user_data["name"].strip(),
-        "username": user_data.name.strip(),
-        "follower_count": user_data["Twitter Followers"],
-        "friends_count": user_data["Twitter Following"],
-        "verified": user_data["Twitter Verified"],
-        "statuses_count": user_data["Twitter Tweets"]
-    })
+    preds = process_tweet(user_data.dropna().to_dict())
 
     return [
         user_data["Gender"] if pd.notna(user_data["Gender"]) else preds["gender_neural"]["value"],
@@ -29,16 +22,25 @@ def go(args):
     data = pd.read_csv(args.input_path, sep = "\t")
 
     data["name"] = (
-        data["Full Name"].str
-        .extract("\((.{1,})\)") # extract text between parens
-        .replace("#[A-z]{1,}\s?", "") # remove hashtags
-        .replace("[^A-z]", "") # remove non-alphanumeric
+        data["Full Name"]
+        .str.extract("\((.{1,})\)", expand = False) # extract text between parens
+        .str.replace("[^A-z]", "", regex = True) # remove non-alphanumeric
+        .str.strip()
     )
 
     gender_map = {"man": "male", "woman": "female"}
     indorg_map = {"ind": "individual", "org": "organisational"}
 
-    authors = data.groupby("Author").first()
+    authors = (
+        data.groupby("Author").first()
+        .rename(columns = {
+            "Twitter Followers": "follwer_count", 
+            "Twitter Following": "friends_count",
+            "Twitter Verified": "verified",
+            "Twitter Tweets": "statuses_count"
+            }
+        )
+    )
 
     demo_inf = pd.DataFrame(
         authors.apply(get_demographics, axis = 1),
@@ -46,8 +48,8 @@ def go(args):
         index = authors.index
     )
 
-    demo_inf["gender_inf"] = demo_inf["gender_inf"].replace(gender_map)
-    demo_inf["indorg_inf"] = demo_inf["indorg_inf"].replace(indorg_map)
+    demo_inf["gender_inf"] = demo_inf["gender_inf"].map(gender_map)
+    demo_inf["indorg_inf"] = demo_inf["indorg_inf"].map(indorg_map)
 
     demo_inf.to_csv(artifact_path / "inferred_demographics.csv")
 

@@ -48,11 +48,11 @@ def go(args):
 
     best_model, best_params, best_perp = None, None, np.inf
 
-    combos = list(product(*gridsearch_params.values()))
+    grid = list(product(*gridsearch_params.values()))
     keys = gridsearch_params.keys()
+    res = []
 
-
-    for grid_params in [{k: v for k, v in zip(keys, combo)} for combo in combos]:
+    for grid_params in [{k: v for k, v in zip(keys, combo)} for combo in grid]:
         logger.info(f"Training model with params {grid_params}...")
         model = LdaMulticore(
             corpus = X_train, 
@@ -66,6 +66,12 @@ def go(args):
             best_perp = model_perp
             best_params = grid_params
             best_model = model
+
+        res.append(grid_params.update({"log_perp": model_perp}))
+
+    logger.info("Saving grid search results to file...")
+    res_df = pd.DataFrame(res)
+    res_df.to_excel(artifact_path / "train_results.csv")
     
     logger.info(f"Saving best model ({best_params}) to file...")
     best_model.save(artifact_path / "lda_model.model")
