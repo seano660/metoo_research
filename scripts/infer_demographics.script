@@ -3,7 +3,7 @@
 #SBATCH --time=16:00:00
 #SBATCH --partition=short
 #SBATCH --mem=10G
-#SBATCH --output=runs/%j.out
+#SBATCH --output=runs/infer_demographics-%j.out
 source /home/ohara.s/miniconda3/bin/activate
 conda activate metoo
 mlflow run . -P steps=infer_demographics
