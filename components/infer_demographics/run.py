@@ -8,12 +8,9 @@ from component_utils.general import create_artifact_folder
 
 
 def get_demographics(user_data: pd.Series):
-    preds = process_tweet(user_data.dropna().to_dict())
+    preds = process_tweet({"user": user_data.dropna().to_dict()})
 
-    return [
-        user_data["Gender"] if pd.notna(user_data["Gender"]) else preds["gender_neural"]["value"],
-        user_data["Account Type"] if pd.notna(user_data["Account Type"]) else preds["indorg_neural_full"]["value"]
-    ]
+    return [preds["gender_neural"]["value"], preds["indorg_neural_full"]["value"]]
 
 
 def go(args):
@@ -28,13 +25,16 @@ def go(args):
         .str.strip()
     )
 
+    data["Gender"] = data["Gender"].replace("unknown", None)
+
     gender_map = {"man": "male", "woman": "female"}
     indorg_map = {"ind": "individual", "org": "organisational"}
 
     authors = (
-        data.groupby("Author").first()
+        data.sort_values(by = ["Author", "Date"], ascending = [True, False])
+        .groupby("Author").first()
         .rename(columns = {
-            "Twitter Followers": "follwer_count", 
+            "Twitter Followers": "followers_count", 
             "Twitter Following": "friends_count",
             "Twitter Verified": "verified",
             "Twitter Tweets": "statuses_count"
@@ -42,16 +42,17 @@ def go(args):
         )
     )
 
-    demo_inf = pd.DataFrame(
-        authors.apply(get_demographics, axis = 1),
-        columns = ["gender_inf", "indorg_inf"],
-        index = authors.index
+    authors.index.name = "screen_name"
+
+    authors[["gender_inf", "indorg_inf"]] = (
+        authors[["name", "followers_count", "friends_count", "statuses_count", "verified"]]
+        .apply(get_demographics, axis = 1)
     )
 
-    demo_inf["gender_inf"] = demo_inf["gender_inf"].map(gender_map)
-    demo_inf["indorg_inf"] = demo_inf["indorg_inf"].map(indorg_map)
+    authors["Gender"] = authors["Gender"].combine_first(authors["gender_inf"]).map(gender_map)
+    authors["Account Type"] = authors["Account Type"].combine_first(authors["indorg_inf"]).map(indorg_map)
 
-    demo_inf.to_csv(artifact_path / "inferred_demographics.csv")
+    authors[["Gender", "Account Type"]].to_csv(artifact_path / "inferred_demographics.csv")
 
 
 if __name__ == "__main__":
