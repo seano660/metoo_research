@@ -20,7 +20,7 @@ logger = logging.getLogger()
 
 gridsearch_params = {
     "num_topics": np.arange(25, 200, 25),
-    "decay": np.arange(0.5, 0.9, 0.1)
+    "decay": np.linspace(0.5, 0.9, 5)
 }
 
 def go(args):
@@ -48,7 +48,11 @@ def go(args):
 
     best_model, best_params, best_perp = None, None, np.inf
 
-    for grid_params in dict(zip(gridsearch_params.keys(), product(*gridsearch_params.values()))):
+    combos = list(product(*gridsearch_params.values()))
+    keys = gridsearch_params.keys()
+
+
+    for grid_params in [{k: v for k, v in zip(keys, combo)} for combo in combos]:
         logger.info(f"Training model with params {grid_params}...")
         model = LdaMulticore(
             corpus = X_train, 

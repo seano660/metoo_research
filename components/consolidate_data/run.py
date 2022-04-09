@@ -22,28 +22,24 @@ def go(args):
 
     logger.info("Combining data files into single CSV...")
 
-    try:
-        with ZipFile(args.input_path, "r") as zip: 
-            with open(artifact_path / "metoo_data.csv", "w") as outfile:
-                outfile.write("\t".join(cols) + "\n")
-                
-            r = re.compile("^All Raw Data\/.{1,}\.xlsx$")
+    with ZipFile(args.input_path, "r") as zip: 
+        with open(artifact_path / "metoo_data.csv", "w") as outfile:
+            outfile.write("\t".join(cols) + "\n")
+            
+        r = re.compile("^All Raw Data\/.{1,}\.xlsx$")
 
-            for file in zip.namelist():
-                if r.match(file):
-                    data = pd.read_excel(zip.read(file), header = 6, usecols = cols, engine = "openpyxl")
-                    data = data[data["Page Type"] == "twitter"][cols]
-                    data.to_csv(
-                        path_or_buf = artifact_path / "metoo_data.csv", 
-                        sep = "\t", 
-                        header = False, 
-                        mode = "a", 
-                        index = False
-                    )
+        for file in zip.namelist():
+            if r.match(file):
+                data = pd.read_excel(zip.read(file), header = 6, usecols = cols, engine = "openpyxl")
+                data = data[data["Page Type"] == "twitter"][cols] # Make sure we maintain the correct ordering!
+                data.to_csv(
+                    path_or_buf = artifact_path / "metoo_data.csv", 
+                    sep = "\t", 
+                    header = False, 
+                    mode = "a", 
+                    index = False
+                )
 
-    except Exception as e:
-        logger.error("An error occurred in the data consolidation process.")
-        raise e
 
 if __name__ == "__main__":
     parser = ArgumentParser()
