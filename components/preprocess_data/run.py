@@ -24,10 +24,7 @@ def go(args):
     data = (
         pd.read_csv(args.input_path, sep = "\t")
         .drop_duplicates()
-        .convert_dtypes()
     )
-
-    data["Date"] = pd.to_datetime(data["Date"])
 
     data = data[data["Thread Entry Type"] != "share"]
 

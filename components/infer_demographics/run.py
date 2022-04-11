@@ -23,6 +23,7 @@ def go(args):
         .str.extract("\((.{1,})\)", expand = False) # extract text between parens
         .str.replace("[^A-z]", "", regex = True) # remove non-alphanumeric
         .str.strip()
+        .fillna("")
     )
 
     data["Gender"] = data["Gender"].replace("unknown", None)
@@ -42,7 +43,7 @@ def go(args):
         )
     )
 
-    authors.index.name = "screen_name"
+    authors.index.name = "screen"
 
     authors[["gender_inf", "indorg_inf"]] = (
         authors[["name", "followers_count", "friends_count", "statuses_count", "verified"]]

@@ -7,6 +7,7 @@ dependencies:
   - pandas
   - nltk
   - gensim
+  - openpyxl
   - pip
   - python=3.9
   - scikit-learn
