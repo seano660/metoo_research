@@ -28,6 +28,7 @@ def go(args):
 
     logger.info("Reading data...")
     data = pd.read_csv(args.input_path, sep = "\t", usecols = ["Full Text"])
+    data = data[data["Thread Entry Type"] != "share"]
     data["Full Text"] = data["Full Text"].fillna("")
 
     logger.info("Tokenizing data...")
@@ -74,7 +75,7 @@ def go(args):
     res_df.to_excel(artifact_path / "train_results.csv")
     
     logger.info(f"Saving best model ({best_params}) to file...")
-    best_model.save(artifact_path / "lda_model.model")
+    best_model.save(str(artifact_path / "lda_model.obj"))
         
    
 

@@ -1,0 +1,19 @@
+name: analysis
+conda_env: conda.yaml
+
+entry_points:
+    main:
+        parameters:
+            mode:
+                description: whether to push artifacts remotely
+                type: str
+            
+            data_path:
+                description:
+                type: str
+
+            model_path:
+                description: Path to LDA model
+                type: str
+
+        command: "python run.py {mode} {data_path} {model_path}" 

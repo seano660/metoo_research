@@ -26,8 +26,6 @@ def go(args):
         .drop_duplicates()
     )
 
-    data = data[data["Thread Entry Type"] != "share"]
-
     data["Full Text"] = (
         data["Full Text"]
         .fillna("")

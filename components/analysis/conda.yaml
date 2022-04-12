@@ -1,4 +1,4 @@
-name: train_lda
+name: analysis
 channels:
   - conda-forge
   - defaults
