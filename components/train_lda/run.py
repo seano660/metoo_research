@@ -27,7 +27,7 @@ def go(args):
     artifact_path = create_artifact_folder(__file__)
 
     logger.info("Reading data...")
-    data = pd.read_csv(args.input_path, sep = "\t", usecols = ["Full Text"])
+    data = pd.read_csv(args.input_path, sep = "\t", usecols = ["Full Text", "Thread Entry Type"])
     data = data[data["Thread Entry Type"] != "share"]
     data["Full Text"] = data["Full Text"].fillna("")
 
