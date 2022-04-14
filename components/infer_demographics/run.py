@@ -1,14 +1,17 @@
 from argparse import ArgumentParser
+from typing import List
 
 from demographer import process_tweet
+from demographer.indorg import NeuralOrganizationDemographer
+from demographer.gender import NeuralGenderDemographer
 import pandas as pd
 import numpy as np
 
 from component_utils.general import create_artifact_folder
 
 
-def get_demographics(user_data: pd.Series):
-    preds = process_tweet({"user": user_data.dropna().to_dict()})
+def get_demographics(user_data: pd.Series, models: List):
+    preds = process_tweet({"user": user_data.dropna().to_dict()}, demographers = models)
 
     return [preds["gender_neural"]["value"], preds["indorg_neural_full"]["value"]]
 
@@ -45,9 +48,14 @@ def go(args):
 
     authors.index.name = "screen"
 
+    models = [
+        NeuralOrganizationDemographer(setup = "full"),
+        NeuralGenderDemographer()
+    ]
+
     authors[["gender_inf", "indorg_inf"]] = (
         authors[["name", "followers_count", "friends_count", "statuses_count", "verified"]]
-        .apply(get_demographics, axis = 1)
+        .apply(get_demographics, axis = 1, models = models)
     )
 
     authors["Gender"] = authors["Gender"].combine_first(authors["gender_inf"]).map(gender_map)
