@@ -2,8 +2,8 @@ from argparse import ArgumentParser
 from typing import List
 
 from demographer import process_tweet
-from demographer.indorg import NeuralOrganizationDemographer
-from demographer.gender import NeuralGenderDemographer
+from demographer.indorg_neural import NeuralOrganizationDemographer
+from demographer.gender_neural import NeuralGenderDemographer
 import pandas as pd
 import numpy as np
 
