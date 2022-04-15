@@ -55,7 +55,7 @@ def go(args):
 
     authors[["gender_inf", "indorg_inf"]] = (
         authors[["name", "followers_count", "friends_count", "statuses_count", "verified"]]
-        .apply(get_demographics, axis = 1, models = models)
+        .apply(get_demographics, axis = 1, models = models, result_type = "expand")
     )
 
     authors["Gender"] = authors["Gender"].combine_first(authors["gender_inf"]).map(gender_map)
