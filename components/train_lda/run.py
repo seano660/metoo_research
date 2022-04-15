@@ -61,23 +61,18 @@ def go(args):
             random_state = args.random_state,
             **grid_params
         )
-        
-        model_perp = model.log_perplexity(X_test)
-        if model_perp < best_perp:
-            best_perp = model_perp
-            best_params = grid_params
-            best_model = model
 
+        model_perp = model.log_perplexity(X_test)
         res.append(grid_params.update({"log_perp": model_perp}))
+
+        model_name = "".join([f"{k}={v}" for k, v in grid_params()])
+        model.save(str(artifact_path / f"lda_model_{model_name}.obj"))
 
     logger.info("Saving grid search results to file...")
     res_df = pd.DataFrame(res)
     res_df.to_excel(artifact_path / "train_results.csv")
     
-    logger.info(f"Saving best model ({best_params}) to file...")
-    best_model.save(str(artifact_path / "lda_model.obj"))
-        
-   
+  
 
 if __name__ == "__main__":
     parser = ArgumentParser()
