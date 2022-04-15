@@ -63,10 +63,11 @@ def go(args):
         )
 
         model_perp = model.log_perplexity(X_test)
-        res.append(grid_params.update({"log_perp": model_perp}))
 
         model_name = "-".join([f"{k}={v}" for k, v in grid_params.items()])
         model.save(str(artifact_path / f"lda_model_{model_name}.obj"))
+
+        res.append(grid_params.update({"log_perp": model_perp}))
 
     logger.info("Saving grid search results to file...")
     res_df = pd.DataFrame(res)
