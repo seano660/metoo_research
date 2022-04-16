@@ -19,7 +19,7 @@ from component_utils.general import create_artifact_folder
 logger = logging.getLogger()
 
 gridsearch_params = {
-    "num_topics": np.arange(25, 200, 25),
+    "num_topics": np.arange(25, 201, 25),
     "decay": np.linspace(0.5, 0.9, 5)
 }
 
@@ -65,13 +65,13 @@ def go(args):
         model_perp = model.log_perplexity(X_test)
 
         model_name = "-".join([f"{k}={v}" for k, v in grid_params.items()])
-        model.save(str(artifact_path / f"lda_model_{model_name}.obj"))
+        model.save(str(artifact_path / f"lda_model_{model_name}"))
 
         res.append(grid_params.update({"log_perp": model_perp}))
 
     logger.info("Saving grid search results to file...")
     res_df = pd.DataFrame(res)
-    res_df.to_excel(artifact_path / "train_results.csv")
+    res_df.to_csv(artifact_path / "train_results.csv")
     
   
 
