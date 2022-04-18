@@ -37,6 +37,7 @@ if __name__ == "__main__":
     parser.add_argument("mode", type = str, help = "Run mode (local or remote)")
     parser.add_argument("data_path", type = str, help = "Path to data")
     parser.add_argument("model_path", type = str, help = "Path to LDA model")
+    parser.add_argument("dict_path", type = str, help = "Path to id2word dict")
     args = parser.parse_args()
 
     go(args)
