@@ -15,6 +15,7 @@ def go(args):
     artifact_path = create_artifact_folder(__file__)
 
     data = pd.read_csv(args.data_path, sep = "\t")
+    data["Full Text"] = data["Full Text"].fillna("")
     model = LdaMulticore.load(args.model_path)
 
     tokenized_data = [simple_preprocess(text) for text in data["Full Text"]]
