@@ -35,7 +35,7 @@ components:
     no_below: 10
 
   append_topics:
-    model_path: ../train_lda/artifacts/lda_model_num_topics=50-decay=0.7"
+    model_path: ../train_lda/artifacts/lda_model_num_topics=50-decay=0.7
     dict_path: ../train_lda/artifacts/dictionary
     data_path: ../preprocess_data/artifacts/metoo_data.csv
 
