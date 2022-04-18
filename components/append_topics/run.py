@@ -19,7 +19,7 @@ def go(args):
     model = LdaMulticore.load(args.model_path)
 
     tokenized_data = [simple_preprocess(text) for text in data["Full Text"]]
-    dictionary = pickle.read(args.dict_path)
+    dictionary = pickle.load(args.dict_path)
     corpus = [dictionary.doc2bow(doc, allow_update=False) for doc in tokenized_data]
 
     topics = [model.get_document_topics(tweet) for tweet in corpus]
