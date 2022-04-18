@@ -1,13 +1,12 @@
 from argparse import ArgumentParser
-from itertools import product
 import logging
+import pickle
 
+import gensim
+from gensim import corpora
 from gensim.utils import simple_preprocess
 from gensim.models.ldamulticore import LdaMulticore
-from gensim import corpora
-import numpy as np
 import pandas as pd
-import pickle
 import matplotlib.pyplot as plt
 
 from component_utils.general import create_artifact_folder
@@ -21,15 +20,18 @@ def go(args):
     model = LdaMulticore.load(args.model_path)
 
     tokenized_data = [simple_preprocess(text) for text in data["Full Text"]]
-
-    dictionary = corpora.Dictionary(tokenized_data)
-    dictionary.filter_extremes(no_below = args.no_below, keep_n = args.vocab_size)
-
-    logger.info("Creating corpus...")
+    dictionary = pickle.read(args.dict_path)
     corpus = [dictionary.doc2bow(doc, allow_update=False) for doc in tokenized_data]
 
+    topics = [model.get_document_topics(tweet) for tweet in corpus]
 
-        
+    topics_mat = gensim.matutils.corpus2csc(topics).T
+
+    tdf = pd.DataFrame.sparse.from_spmatrix(topics_mat)
+
+    data[[f"topic_{i+1}" for i in range(model.num_topics)]] = tdf
+
+    data.to_csv(artifact_path / "metoo_topics.csv", sep = "\t")        
    
 
 if __name__ == "__main__":

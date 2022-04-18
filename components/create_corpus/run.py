@@ -35,7 +35,7 @@ def go(args):
     )
 
     logger.info("Writing train/test corpus to file...")
-    X_train.to_csv(artifact_path / "X_train.csv", sep = "\t")
+    X_train.to_csv(artifact_path / "X_train.", sep = "\t")
     X_test.to_csv(artifact_path / "X_test.csv", sep = "\t")
     pickle.dump(dictionary, artifact_path / "dictionary.obj")
 

@@ -1,6 +1,7 @@
 from argparse import ArgumentParser
 from itertools import product
 import logging
+import pickle
 
 import nltk
 nltk.download("punkt", quiet = True)
@@ -47,8 +48,6 @@ def go(args):
         train_size = args.train_size
     )
 
-    best_model, best_params, best_perp = None, None, np.inf
-
     grid = list(product(*gridsearch_params.values()))
     keys = gridsearch_params.keys()
     res = []
@@ -73,6 +72,9 @@ def go(args):
     logger.info("Saving grid search results to file...")
     res_df = pd.DataFrame(res)
     res_df.to_csv(artifact_path / "train_results.csv")
+
+    with open(artifact_path / "dictionary", "wb") as f:
+        pickle.dump(dictionary, f)
     
   
 
