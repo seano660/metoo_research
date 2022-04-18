@@ -3,11 +3,9 @@ import logging
 import pickle
 
 import gensim
-from gensim import corpora
 from gensim.utils import simple_preprocess
 from gensim.models.ldamulticore import LdaMulticore
 import pandas as pd
-import matplotlib.pyplot as plt
 
 from component_utils.general import create_artifact_folder
 
