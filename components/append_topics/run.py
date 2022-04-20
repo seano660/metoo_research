@@ -14,13 +14,14 @@ logger = logging.getLogger()
 def go(args):
     artifact_path = create_artifact_folder(__file__)
 
-    data = pd.read_csv(args.data_path, sep = "\t")
+    data = pd.read_csv(args.data_path, sep = "\t", index_col = 0)
     data["Full Text"] = data["Full Text"].fillna("")
     model = LdaMulticore.load(args.model_path)
 
     tokenized_data = [simple_preprocess(text) for text in data["Full Text"]]
     with open(args.dict_path, "rb") as f:
         dictionary = pickle.load(f)
+
     corpus = [dictionary.doc2bow(doc, allow_update=False) for doc in tokenized_data]
 
     topics = [model.get_document_topics(tweet) for tweet in corpus]

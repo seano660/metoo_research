@@ -13,7 +13,7 @@ logger = logging.getLogger()
 def go(args):
     cols = [
         "Date", "Page Type", "Account Type", "Author", "Full Name", "Full Text", 
-        "Gender", "Hashtags", "Impact", "Impressions", "Thread Entry Type", 
+        "Gender", "Hashtags", "Impact", "Impressions", "Thread Entry Type", "Thread Author",
         "Twitter Followers", "Twitter Following", "Twitter Tweets", "Twitter Reply Count",
         "Twitter Verified", "Twitter Retweets", "Reach (new)", "Region"
     ]
