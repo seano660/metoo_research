@@ -25,6 +25,8 @@ def go(args):
         pd.read_csv(args.input_path, sep = "\t")
         .drop_duplicates()
     )
+    data["Date"] = pd.to_datetime(data["Date"])
+    data = data[data["Date"] < "2017-10-15"] # remove tweets prior to Alyssa Milano #MeToo tweet
 
     data["Full Text"] = (
         data["Full Text"]
@@ -34,6 +36,7 @@ def go(args):
         .str.replace("'", "") # remove single quotes
         .apply(lambda x: " ".join([w for w in simple_preprocess(x, deacc = True) if w not in sws])) # remove stopwords
     )
+
 
     data.to_csv(artifact_path / "metoo_data.csv", sep = "\t")
 

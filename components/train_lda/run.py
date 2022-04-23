@@ -20,7 +20,7 @@ from component_utils.general import create_artifact_folder
 logger = logging.getLogger()
 
 gridsearch_params = {
-    "num_topics": np.arange(25, 201, 25),
+    "num_topics": np.arange(5, 40, 5),
     "decay": np.linspace(0.5, 0.9, 5)
 }
 
