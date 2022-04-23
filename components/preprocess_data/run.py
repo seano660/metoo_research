@@ -26,7 +26,7 @@ def go(args):
         .drop_duplicates()
     )
     data["Date"] = pd.to_datetime(data["Date"])
-    data = data[data["Date"] < "2017-10-15"] # remove tweets prior to Alyssa Milano #MeToo tweet
+    data = data[data["Date"] > "2017-10-15"] # remove tweets prior to Alyssa Milano #MeToo tweet
 
     data["Full Text"] = (
         data["Full Text"]
