@@ -16,7 +16,7 @@ It is recommended to create a new `conda` environment to run the code (see [cond
 Once in the desired environment, any requisite installs can be installed through the following command (ensure you've navigated to the root directory of the code):
 
 ```
-conda install -f requirements.txt
+conda install --file requirements.txt --channel conda-forge
 ```
 
 #### Data
