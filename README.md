@@ -1,6 +1,8 @@
 # metoo_research
 (Northeastern) Research on social media patterns surrounding MeToo movement
 
+---
+
 ### Setup
 
 The code builds its own isolated Conda environments to run each component of the pipeline, and thus requires minimal manual setup. 
@@ -21,6 +23,8 @@ conda install --file requirements.txt --channel conda-forge
 
 #### Data
 The `data` folder hosts two files used for tagging business entities, but this folder should also be the location for the raw data ZIP file (NOT available from this repository). 
+
+---
 
 ### Run the code
 The project is built using `mlflow` and `hydra`, with a central `config.yaml` file that sets key pipeline parameters. Most components will take some kind of input, which is generally the output of the preceding component; other components have parameters that can be set/modified here as well. 
@@ -51,6 +55,7 @@ sbatch main.script
 
 For debugging purposes, job results will be output in the `runs` directory of the root folder. 
 
+---
 
 ### Notebooks
 Analysis notebooks are also included in the `notebooks` directory. 
