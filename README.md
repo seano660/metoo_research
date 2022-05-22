@@ -27,7 +27,7 @@ The project is built using `mlflow` and `hydra`, with a central `config.yaml` fi
 
 To change the value of any parameter at runtime, use the optional `-P` flag followed by the desired key/value. 
 
-**NOTE**: Runtimes will be much longer when running the code from scratch, as it takes some time to configure the conda environments of each component. 
+**NOTE**: Runtimes will be much longer when running the code from scratch, as it takes some time to configure/install the conda environments of each component. 
 
 #### In interactive terminal (local environment)
 
