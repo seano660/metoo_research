@@ -5,27 +5,19 @@ main:
   steps: all
 
 components:
-  download_data: 
-
   consolidate_data:
-    input_path: ../download_data/artifacts/metoo_data.zip
+    input_path: ../../data/metoo_data.zip
+    samp_size: 1
 
   preprocess_data:
     input_path: ../consolidate_data/artifacts/metoo_data.csv
     exclude: metoo,rt
 
-  create_corpus:
-    input_path: ../preprocess_data/artifacts/metoo_data.csv
-    train_size: 0.75
-    random_state: 0
-    vocab_size: 50000
-    no_below: 10
-
-  infer_news:
-    input_path: ../preprocess_data/artifacts/metoo_data.csv
-    train_size: 0.75
-    random_state: 0
-    vocab_size: 10000
+  # infer_news:
+  #   input_path: ../preprocess_data/artifacts/metoo_data.csv
+  #   train_size: 0.75
+  #   random_state: 0
+  #   vocab_size: 10000
 
   train_lda:
     input_path: ../preprocess_data/artifacts/metoo_data.csv  
@@ -42,3 +34,7 @@ components:
   infer_demographics:
     input_path: ../consolidate_data/artifacts/metoo_data.csv
 
+  postprocess_data:
+    input_path: ../append_topics/artifacts/metoo_topics.csv
+    demo_path: ../infer_demographics/artifacts/inferred_demographics.csv
+    influencer_thresh: 20000

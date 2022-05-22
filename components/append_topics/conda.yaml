@@ -1,4 +1,4 @@
-name: analysis
+name: append_topics
 channels:
   - conda-forge
   - defaults

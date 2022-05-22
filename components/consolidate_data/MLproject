@@ -11,5 +11,10 @@ entry_points:
             input_path:
                 description: where to find the input artifact
                 type: str
+        
+            samp_size:
+                description: number of files to read
+                type: int
+                default: null
 
-        command: "python run.py {mode} {input_path}" 
+        command: "python run.py {mode} {input_path} --samp_size {samp_size}"

@@ -1,0 +1,14 @@
+name: postprocess_data
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - mlflow
+  - pandas
+  - pip
+  - python=3.9
+  - openpyxl
+  - lxml
+  - pip:
+    - wandb
+    - ../component_utils

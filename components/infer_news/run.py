@@ -1,3 +1,8 @@
+"""
+This is an old component not currently used in the pipeline, but kept around for 
+possible future use
+"""
+
 from argparse import ArgumentParser
 
 from sklearn.model_selection import train_test_split

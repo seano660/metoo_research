@@ -1,0 +1,23 @@
+name: postprocess_data
+conda_env: conda.yaml
+
+entry_points:
+    main:
+        parameters:
+            mode:
+                description: whether to push artifacts remotely
+                type: str
+            
+            input_path:
+                description: Path to input data
+                type: str
+            
+            demo_path:
+                description: Path to inferred demographics
+                type: str
+
+            influencer_thresh:
+                description: follower count threshold for influencer designation
+                type: int
+
+        command: "python run.py {mode} {input_path} {demo_path} {influencer_thresh}" 

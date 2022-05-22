@@ -1,4 +1,4 @@
-name: analysis
+name: append_topics
 conda_env: conda.yaml
 
 entry_points:

@@ -4,6 +4,6 @@
 #SBATCH --partition=short
 #SBATCH --mem=10G
 #SBATCH --output=runs/append_topics-%j.out
-source /home/ohara.s/miniconda3/bin/activate
+source ~/miniconda3/bin/activate
 conda activate metoo
 mlflow run . -P steps=append_topics
