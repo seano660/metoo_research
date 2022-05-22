@@ -31,7 +31,7 @@ def go(args):
 
         to_compile = [f for f in zip.namelist() if r.match(f)]
 
-        if args.samp_size is not None:
+        if args.samp_size != -1:
             to_compile = to_compile[:args.samp_size]
 
         for file in to_compile:
@@ -50,7 +50,7 @@ if __name__ == "__main__":
     parser = ArgumentParser()
     parser.add_argument("mode", type = str, help = "Run mode (local or remote)")
     parser.add_argument("input_path", type = str, help = "Path to input data (.zip)") 
-    parser.add_argument("--samp_size", type = int, required = False, help = "Number of files to sample data from")     
+    parser.add_argument("--samp_size", type = int, required = False, default = None, help = "Number of files to sample data from")     
     args = parser.parse_args()
 
     go(args)

@@ -15,6 +15,6 @@ entry_points:
             samp_size:
                 description: number of files to read
                 type: int
-                default: null
+                default: -1
 
         command: "python run.py {mode} {input_path} --samp_size {samp_size}"
