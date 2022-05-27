@@ -5,6 +5,8 @@
 
 The code builds its own isolated Conda environments to run each component of the pipeline, and thus requires minimal manual setup. 
 
+**Note**: The `infer_demographics` component requires an older version of tensorflow which is not compatible with Apple M1 chips. Affected users will not be able to run this component. 
+
 #### conda
 `conda` is a basic requirement of any system looking to run the code: see [conda's install docs](https://conda.io/projects/conda/en/latest/user-guide/install/index.html) for instructions on how to install for your system, and [Northeastern's RC-DOCS](https://rc-docs.northeastern.edu/en/latest/software/conda.html#working-with-a-miniconda-environment) for info more specifically tailored to the Discovery Cluster. 
 

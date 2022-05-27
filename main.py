@@ -1,11 +1,13 @@
 import os
-import json
-import tempfile
+import logging
 
 import hydra
 import mlflow
 
-@hydra.main(config_name="config", config_path = ".")
+logger = logging.getLogger()
+logger.setLevel(logging.ERROR)
+
+@hydra.main(config_name="config", config_path = ".", version_base = None)
 def go(config):
 
     if config["mode"] == "remote":
@@ -17,9 +19,9 @@ def go(config):
     steps = config["main"]["steps"]
     to_run = steps.split(",") if steps != "all" else config["components"].keys()
 
-    # with tempfile.TemporaryDirectory():
     for component, params in config["components"].items():
         if component in to_run:
+            print(f"\n====> Running component: {component}\n")
             mlflow.run(
                 os.path.join(root_path, f"components/{component}"),
                 "main",

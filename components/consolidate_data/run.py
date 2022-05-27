@@ -52,5 +52,5 @@ if __name__ == "__main__":
     parser.add_argument("input_path", type = str, help = "Path to input data (.zip)") 
     parser.add_argument("--samp_size", type = int, required = False, default = None, help = "Number of files to sample data from")     
     args = parser.parse_args()
-
+    raise ValueError
     go(args)

@@ -3,8 +3,8 @@ channels:
   - conda-forge
   - defaults
 dependencies:
-  - hydra-core
   - mlflow
   - pip
   - pip:
     - wandb
+    - hydra-core
