@@ -1,8 +1,8 @@
 #!/bin/bash
-#SBATCH --nodes=1
-#SBATCH --time=04:00:00
+#SBATCH --nodes=2
+#SBATCH --time=24:00:00
 #SBATCH --partition=short
-#SBATCH --mem=10G
-#SBATCH --output=runs/append_topics-%j.out
+#SBATCH --mem=20G
+#SBATCH --output=runs/main-%j.out
 source ~/miniconda3/bin/activate
 mlflow run .
