@@ -63,3 +63,5 @@ For debugging purposes, job results will be output in the `runs` directory of th
 Analysis notebooks are also included in the `notebooks` directory. 
 * `lda_vis` is meant as a testing ground for selecting the best LDA model
 * `analysis` contains any analysis on the final pipeline artifact (i.e. processed/labeled tweets with topic scores). 
+
+If running these notebooks in the Discovery Cluster, it is recommended to specify the conda PATH when starting the notebook compute cluster.
