@@ -13,4 +13,4 @@ dependencies:
     - wandb==0.12.11
     - demographer==1.0.4
     - ../component_utils
-    - protobuf==3.8.0
+    - protobuf==3.12.0
