@@ -24,7 +24,7 @@ def go(config):
 
     for component, params in config["components"].items():
         if component in to_run:
-            print(f"\n====> Running component: {component}\n")
+            logger.info(f"\n====> Running component: {component}\n")
             mlflow.run(
                 os.path.join(root_path, f"components/{component}"),
                 "main",
