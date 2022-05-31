@@ -33,6 +33,8 @@ The project is built using `mlflow` and `hydra`, with a central `config.yaml` fi
 
 To change the value of any parameter at runtime, use the optional `-P` flag followed by the desired key/value. 
 
+To allow for rapid testing/debugging, the `samp_size` parameter of the consolidate_data component is preconfigured to a value of 1. Remove this parameter from the main `config.yaml` file, or set it to -1, to run the production pipeline. 
+
 **NOTE**: Runtimes will be much longer when running the code from scratch, as it takes some time to configure/install the conda environments of each component. 
 
 #### In interactive terminal (local environment)
@@ -56,6 +58,8 @@ sbatch scripts/main.script
 ```
 
 For debugging purposes, job results will be output in the `runs` directory of the root folder. 
+
+**NOTE**: Batch scripts by default run from the base conda environment, which therefore must be configured with mlflow. To run from a different environment, insert the `conda activate [env_name]` command into the batch script. 
 
 ---
 
