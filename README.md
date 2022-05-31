@@ -52,7 +52,7 @@ mlflow run . -P steps=component1,component2,...
 
 It is not recommended to run Discovery Cluster jobs in the same way as the local environment, because any connection interruptions will automatically terminate the session. Batch scripts should be used instead, which run independently of the local session. There are several pre-configured batch scripts in the `scripts` directory: `main.script` will run the entire pipeline, and other scripts run a single component. These scripts should be run using the `sbatch` command (see [RC-DOCS](https://rc-docs.northeastern.edu/en/latest/using-discovery/sbatch.html)); for example:
 ```
-sbatch main.script
+sbatch scripts/main.script
 ```
 
 For debugging purposes, job results will be output in the `runs` directory of the root folder. 
