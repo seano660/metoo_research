@@ -16,9 +16,6 @@ def go(config):
 
     root_path = hydra.utils.get_original_cwd()
 
-    if not os.path.exists("runs"):
-        os.makedirs("runs")
-
     steps = config["main"]["steps"]
     to_run = steps.split(",") if steps != "all" else config["components"].keys()
 
