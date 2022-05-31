@@ -2,7 +2,7 @@
 #SBATCH --nodes=1
 #SBATCH --time=16:00:00
 #SBATCH --partition=short
-#SBATCH --mem=10G
+#SBATCH --mem=50G
 #SBATCH --output=runs/infer_demographics-%j.out
 source ~/miniconda3/bin/activate
 mlflow run . -P steps=infer_demographics
